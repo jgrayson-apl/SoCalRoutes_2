@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0 maximum-scale=1.0"/>
+    <!-- META -->
+    <!--<meta property="og:title" content="">-->
+    <!--<meta property="og:description" content="">-->
+    <!--<meta property="og:image" content="https://geoxc-apps.bd.esri.com/assets/GeoXC.png">-->
+    <!--<meta property="og:url" content="https://geoxc-apps.bd.esri.com/.../index.html">-->
+    <!-- ICON -->
+    <link rel="icon" href="./assets/favicon.ico" sizes="32x32" type="image/vnd.microsoft.icon">
+    <!-- TITLE -->
+    <title class="application-title"></title>
+    
+    <!-- CALCITE -->
+    <script src="https://js.arcgis.com/calcite-components/1.0.0-beta.86/calcite.esm.js" type="module"></script>
+    <link href="https://js.arcgis.com/calcite-components/1.0.0-beta.86/calcite.css" rel="stylesheet"/>
+    
+    <!-- ArcGIS API for JavaScript-->
+    <link href="https://js.arcgis.com/4.27/@arcgis/core/assets/esri/themes/dark/main.css" rel="stylesheet"/>
+    <script src="https://js.arcgis.com/4.27/"></script>
+    
+    <!-- APPLICATION -->
+    <link rel="stylesheet" type="text/css" href="./css/app-base.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/application.css">
+    <script type="module" src="./js/Application.js"></script>
+  </head>
+  <body class="calcite-theme-dark">
+    
+    <calcite-shell dir="ltr">
+      
+      <header class="content-row" slot="header">
+        <h2 class="application-title"></h2>
+        
+        <div class="content-row">
+          
+          <div id="sign-in-container"></div>
+          
+          <calcite-action-bar class="content-row" expand-disabled="true">
+            <calcite-action id="app-share-action" appearance="clear" scale="m" title="share current options..." text="share current options" icon="link" hidden></calcite-action>
+            <calcite-action id="app-details-action" appearance="clear" scale="m" title="app details..." text="app details" icon="information"></calcite-action>
+          </calcite-action-bar>
+  
+          <!-- SHAREABLE ALERT -->
+          <calcite-alert id="app-share-alert" icon="launch" placement="bottom" closable auto-dismiss auto-dismiss-duration="medium" color="green">
+            <div slot="message">
+              Shareable link has been copied to the clipboard.
+            </div>
+            <calcite-link id="app-share-link" slot="link" href="#" target="_blank" role="link" title="open in new tab">
+              open in new tab
+            </calcite-link>
+          </calcite-alert>
+  
+          <!-- NOTICES ADN ALERTS -->
+          <calcite-alert id="app-notice" icon="" placement="bottom" width="auto" closable color="red">
+            <div slot="title"></div>
+            <div slot="message"></div>
+          </calcite-alert>
+        
+        </div>
+      </header>
+      
+      <!-- LEFT -->
+      <calcite-shell-panel slot="primary-panel" position="start" width-scale="m" collapsed="true">
+        
+        <calcite-action-bar id="side-panel-action-bar" slot="action-bar" hidden>
+          <calcite-action text="Layers" title="map layers" icon="layers" class="toggle-action" data-toggle="layer-list"></calcite-action>
+          <calcite-action text="Features" title="list of features" icon="list" class="toggle-action" data-toggle="features-list" hidden></calcite-action>
+        </calcite-action-bar>
+    
+        <calcite-panel class="toggle-panel" heading="Layers" data-toggle="layer-list" hidden>
+          <calcite-action slot="header-actions-start" icon="layers"></calcite-action>
+          <calcite-action slot="header-actions-end" icon="x" title="close panel" class="toggle-close" data-toggle="layer-list"></calcite-action>
+          <div id="layer-list-container"></div>
+        </calcite-panel>
+        
+      </calcite-shell-panel>
+      
+      <!-- CENTER -->
+      <div id="center-container" class="content-col content-fill">
+        <div id="time-slider-container"></div>
+        <div id="view-container">
+          <calcite-loader id="view-updating" type="indeterminate" scale="s"></calcite-loader>
+        </div>
+      </div>
+      
+    </calcite-shell>
+    
+    <!-- LOADER -->
+    <calcite-loader id="app-loader" active="true" type="indeterminate" scale="l"></calcite-loader>
+    
+    <!-- APP DETAILS MODAL -->
+    <calcite-modal id="app-details-modal" color="blue" background-color="grey" scale="m" width="m" role="dialog" aria-labelledby="app-modal-title">
+      <h3 slot="header" id="app-modal-title" class="application-title"></h3>
+      <div slot="content" class="application-description"></div>
+      <div slot="secondary" class="margin-m">
+        <calcite-label layout="inline">
+          <span>hide on startup</span>
+          <calcite-checkbox id="hide-startup-checkbox"></calcite-checkbox>
+        </calcite-label>
+      </div>
+      <calcite-button id="app-details-ok-btn" slot="primary" width="full" hidden>OK</calcite-button>
+    </calcite-modal>
+   
+  
+  </body>
+</html>
